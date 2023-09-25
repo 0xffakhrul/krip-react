@@ -5,6 +5,7 @@ export type Coin = {
   firstname: string;
   lastname: string;
   email: string;
+  website: string
 };
 
 export const columns: ColumnDef<Coin>[] = [
@@ -23,5 +24,9 @@ export const columns: ColumnDef<Coin>[] = [
   {
     accessorKey: "email",
     header: "Email",
+  },
+  {
+    accessorKey: "website",
+    header: "Website",
   },
 ];
