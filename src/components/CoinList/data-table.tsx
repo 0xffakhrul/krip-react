@@ -25,7 +25,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends { id: string }, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -38,8 +38,8 @@ export function DataTable<TData, TValue>({
 
   const navigate = useNavigate();
   //TODO : Try to fix this. this is a hack
-  const handleOnClick = (row: any) => {
-    navigate(`/coin/${parseInt(row.id) + 1}`);
+  const handleOnClick = (coinId: string) => {
+    navigate(`/coin/${coinId}`);
   };
   return (
     <div>
@@ -69,8 +69,9 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  //this does not work
                   onClick={() => {
-                    handleOnClick(row);
+                    handleOnClick(row.original.id);
                   }}
                 >
                   {row.getVisibleCells().map((cell) => (

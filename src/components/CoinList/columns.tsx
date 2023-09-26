@@ -2,10 +2,10 @@ import { ColumnDef } from "@tanstack/react-table";
 
 export type Coin = {
   id: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  website: string
+  name: string;
+  current_price: number;
+  // email: string;
+  // website: string
 };
 
 export const columns: ColumnDef<Coin>[] = [
@@ -14,19 +14,19 @@ export const columns: ColumnDef<Coin>[] = [
     header: "User ID",
   },
   {
-    accessorKey: "firstname",
+    accessorKey: "name",
     header: "First Name",
   },
   {
-    accessorKey: "lastname",
+    accessorKey: "current_price",
     header: "Last Name",
   },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "website",
-    header: "Website",
-  },
+  // {
+  //   accessorKey: "email",
+  //   header: "Email",
+  // },
+  // {
+  //   accessorKey: "website",
+  //   header: "Website",
+  // },
 ];
