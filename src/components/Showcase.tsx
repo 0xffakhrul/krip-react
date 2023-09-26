@@ -10,25 +10,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
 
 //TODO: CHANGE API URL
 interface Coin {
   id: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-  };
+  name: string;
+  current_price: number;
+  price_change_percentage_24h: number;
 }
 
 export default function Showcase() {
   const [coins, setCoins] = useState<Coin[]>([]);
   const [loading, setLoading] = useState(true);
-  const URL = "https://jsonplaceholder.org/users";
+  const URL =
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=4&page=1&sparkline=false";
   useEffect(() => {
     //GET
     axios
@@ -52,24 +48,29 @@ export default function Showcase() {
         <div className="container px-0 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
           {coins.map((coin) => (
             <Link to={`/coin/${coin.id}`} key={coin.id}>
-              <Card
-                key={coin.id}
-                className="bg-zinc-900 border border-zinc-700"
+              <motion.div
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ ease: "easeIn", duration: 0.5 }}
               >
-                <CardHeader>
-                  <CardTitle className="text-white">{coin.firstname}</CardTitle>
-                  <CardDescription>{coin.firstname}</CardDescription>
-                </CardHeader>
-                <CardContent className="text-white">
-                  <p>
-                    {coin.address.city} {coin.address.street}{" "}
-                    {coin.address.suite}
-                  </p>
-                </CardContent>
-                <CardFooter className="text-muted-foreground">
-                  <p>Card Footer</p>
-                </CardFooter>
-              </Card>
+                <Card
+                  key={coin.id}
+                  className="bg-zinc-900 border border-zinc-700 hover:bg-zinc-700"
+                >
+                  <CardHeader>
+                    <CardTitle className="text-white">{coin.name}</CardTitle>
+                    <CardDescription className="text-base">
+                      {coin.price_change_percentage_24h}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-white">
+                    <p className="text-4xl font-bold">6900</p>
+                  </CardContent>
+                  {/* <CardFooter className="text-muted-foreground"> */}
+                  {/* <p>Card Footer</p> */}
+                  {/* </CardFooter> */}
+                </Card>
+              </motion.div>
             </Link>
           ))}
         </div>
