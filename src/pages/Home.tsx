@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div>
       <main
-        className="mx-auto max-w-7xl px-6 min-h-screen bg-[length:1200px_800px] bg-top bg-no-repeat"
+        className="mx-auto max-w-7xl px-6 bg-[length:1200px_800px] bg-top bg-no-repeat"
         style={{ backgroundImage: `url(${grid})` }}
       >
         <Headline />
